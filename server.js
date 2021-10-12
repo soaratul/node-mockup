@@ -6,6 +6,13 @@ const mockApiMiddleware = require('express-mock-api-middleware')(
   path.resolve(__dirname, 'mock'),
   { ignore: ['asm.js'] }
 );
+
+app.all('/*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
+
 app.use('/', mockApiMiddleware);
 
 const host = 'localhost';
